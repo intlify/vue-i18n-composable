@@ -1,11 +1,18 @@
 {
   "name": "vue-i18n-composable",
-  "version": "0.0.1-alpha.1",
+  "version": "0.1.0",
   "main": "dist/index.js",
+  "module": "dist/index.m.js",
+  "types": "dist/index.d.ts",
   "repository": "https://github.com/intlify/vue-i18n-composable",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
+    "prepare": "yarn build",
     "build": "tsup src/index.ts --format cjs,esm --dts --external vue,vue-i18n,@vue/composition-api",
     "dev": "yarn build --watch"
   },
