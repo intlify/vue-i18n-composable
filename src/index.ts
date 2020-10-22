@@ -13,7 +13,7 @@ export function createI18n(options?: VueI18n.I18nOptions) {
 
 export function useI18n() {
   if (!i18nInstance)
-    throw new Error('vue-i18n not initalized')
+    throw new Error('vue-i18n not initialized')
 
   const i18n = i18nInstance
 
@@ -34,5 +34,6 @@ export function useI18n() {
     tc: vm.$tc.bind(vm),
     d: vm.$d.bind(vm),
     te: vm.$te.bind(vm),
+    n: vm.$n.bind(vm),
   }
 }
