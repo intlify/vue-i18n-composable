@@ -12,7 +12,7 @@ export function createI18n(options?: VueI18n.I18nOptions, vue: VueConstructor = 
   return i18nInstance
 }
 
-export interface I18nHook {
+export interface Composer {
   locale: WritableComputedRef<string>
   t: typeof VueI18n.prototype.t
   tc: typeof VueI18n.prototype.tc
@@ -21,7 +21,7 @@ export interface I18nHook {
   n: typeof VueI18n.prototype.n
 }
 
-export function useI18n(): I18nHook {
+export function useI18n(): Composer {
   if (!i18nInstance)
     throw new Error('vue-i18n not initialized')
 
