@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import { computed, getCurrentInstance } from '@vue/composition-api'
+import { VueConstructor } from 'vue/types/umd'
 
 let i18nInstance: VueI18n | undefined
 
-export function createI18n(options?: VueI18n.I18nOptions) {
-  Vue.use(VueI18n)
+export function createI18n(options?: VueI18n.I18nOptions, vue: VueConstructor = Vue) {
+  vue.use(VueI18n)
   i18nInstance = new VueI18n(options)
 
   return i18nInstance
