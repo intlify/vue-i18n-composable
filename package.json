@@ -12,9 +12,10 @@
     "src"
   ],
   "scripts": {
-    "prepare": "yarn build",
+    "prepublishOnly": "npm run build",
     "build": "tsup src/index.ts --format cjs,esm --dts --external vue,vue-i18n,@vue/composition-api",
-    "dev": "yarn build --watch"
+    "dev": "npm run build --watch",
+    "release": "npx bumpp --commit --tag && npm publish && git push"
   },
   "peerDependencies": {
     "vue": ">= 2.5",
