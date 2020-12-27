@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config-ts": "^0.3.3",
-    "@vue/composition-api": "^1.0.0-beta.14",
+    "@vue/composition-api": "^1.0.0-beta.22",
     "eslint": "^7.9.0",
     "tsup": "^3.6.1",
     "typescript": "^4.0.2",
