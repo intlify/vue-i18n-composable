@@ -27,7 +27,8 @@ export function useI18n(): Composer {
 
   const i18n = i18nInstance
 
-  const vm = getCurrentInstance() || new Vue({})
+  const instance = getCurrentInstance()
+  const vm = instance?.proxy || instance as unknown as InstanceType<VueConstructor> || new Vue({})
 
   const locale = computed({
     get() {
