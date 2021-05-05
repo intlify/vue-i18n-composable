@@ -2,7 +2,7 @@
   "name": "vue-i18n-composable",
   "version": "0.2.1",
   "main": "dist/index.js",
-  "module": "dist/index.m.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/intlify/vue-i18n-composable",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
