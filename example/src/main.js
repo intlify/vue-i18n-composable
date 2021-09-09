@@ -15,23 +15,23 @@ const i18n = createI18n({
         list: 'hello, {0}!',
         named: 'hello, {name}!',
         linked: '@:message.named How are you?',
-        plural: 'no bananas | {n} banana | {n} bananas',
-      },
+        plural: 'no bananas | {n} banana | {n} bananas'
+      }
     },
     ja: {
       message: {
         language: '日本語',
         list: 'こんにちは、{0}！',
         named: 'こんにちは、{name}！',
-        linked: '@:message.named ごきげんいかが？',
-      },
-    },
-  },
+        linked: '@:message.named ごきげんいかが？'
+      }
+    }
+  }
 })
 
 const app = createApp({
   i18n,
-  render: h => h(App),
+  render: h => h(App)
 })
 
 app.mount('#app')

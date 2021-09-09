@@ -1,34 +1,51 @@
 {
   "name": "vue-i18n-composable",
-  "version": "0.2.2",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "repository": "https://github.com/intlify/vue-i18n-composable",
+  "version": "0.2.1",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
-  "license": "MIT",
+  "devDependencies": {
+    "@antfu/eslint-config-ts": "^0.6.6",
+    "@types/jest": "^27.0.1",
+    "@vue/composition-api": "^1.1.4",
+    "@vue/test-utils": "^1.2.2",
+    "@vue/vue2-jest": "^27.0.0-alpha.1",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.1.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.2",
+    "ts-jest": "^27.0.5",
+    "tsup": "^4.14.0",
+    "typescript": "^4.4.2",
+    "vue": "^2.6.12",
+    "vue-i18n": "^8.25.0"
+  },
   "files": [
     "dist",
     "src"
   ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "peerDependencies": {
+    "@vue/composition-api": ">= 1.0.0-beta.1",
+    "vue": ">=2.5 <3",
+    "vue-i18n": ">=8 <9"
+  },
+  "repository": "https://github.com/intlify/vue-i18n-composable",
   "scripts": {
-    "prepublishOnly": "npm run build",
     "build": "tsup src/index.ts --format cjs,esm --dts --external vue,vue-i18n,@vue/composition-api",
     "dev": "npm run build --watch",
+    "test": "npm run test:cover",
+    "test:cover": "npm run test:unit -- --coverage",
+    "test:unit": "jest --clearCache && jest --env node",
+    "fix": "npm-run-all --parallel lint:fix format:fix",
+    "format": "prettier --config .prettierrc --ignore-path .prettierignore '**/*.{js,json,html,ts}'",
+    "format:fix": "npm run format -- --write",
+    "lint": "eslint ./src --config .eslintrc.js --ext .ts",
+    "lint:fix": "npm run lint -- --fix",
+    "prepublishOnly": "npm run build",
     "release": "npx bumpp --commit --tag && npm publish && git push"
   },
-  "peerDependencies": {
-    "vue": ">=2.5 <3",
-    "vue-i18n": ">=8 <9",
-    "@vue/composition-api": ">= 1.0.0-beta.1"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config-ts": "^0.6.4",
-    "@vue/composition-api": "^1.0.0-rc.8",
-    "eslint": "^7.25.0",
-    "tsup": "^4.10.1",
-    "typescript": "^4.2.4",
-    "vue": "^2.6.12",
-    "vue-i18n": "^8.24.4"
-  }
+  "types": "dist/index.d.ts"
 }
