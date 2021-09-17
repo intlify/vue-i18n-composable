@@ -58,8 +58,8 @@ module.exports = {
   // globalSetup: undefined,
   globals: {
     'ts-jest': {
-      diagnostics: false,
-    },
+      diagnostics: false
+    }
   },
 
   // A path to a module which exports an async function that is triggered once after all test suites
@@ -77,14 +77,7 @@ module.exports = {
   // ],
 
   // An array of file extensions your modules use
-  moduleFileExtensions: [
-    "js",
-    "jsx",
-    "ts",
-    "tsx",
-    "json",
-    "vue"
-  ],
+  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'vue'],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},
@@ -184,7 +177,7 @@ module.exports = {
   // transform: undefined,
   transform: {
     // process `*.vue` files with `vue-jest`
-    ".*\\.(vue)$": "@vue/vue2-jest"
+    '.*\\.(vue)$': '@vue/vue2-jest'
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
@@ -201,7 +194,7 @@ module.exports = {
 
   // An array of regexp patterns that are matched against all source file paths before re-running tests in watch mode
   // watchPathIgnorePatterns: [],
-  watchPathIgnorePatterns: ['/node_modules/', '/dist/', '/.git/'],
+  watchPathIgnorePatterns: ['/node_modules/', '/dist/', '/.git/']
 
   // Whether to use watchman for file crawling
   // watchman: true,

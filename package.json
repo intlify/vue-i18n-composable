@@ -1,9 +1,29 @@
 {
   "name": "vue-i18n-composable",
-  "version": "0.2.1",
+  "description": "Composition API for vue-i18n in Vue 2.x",
+  "version": "0.2.2",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "bugs": {
+    "url": "https://github.com/inlitify/vue-i18n-composable/issues"
+  },
+  "changelog": {
+    "labels": {
+      "Type: Feature": ":star: Features",
+      "Type: Bug": ":bug: Bug Fixes",
+      "Type: Security": ":lock: Security Fixes",
+      "Type: Performance": ":chart_with_upwards_trend: Performance Fixes",
+      "Type: Improvement": ":zap: Improvement Features",
+      "Type: Breaking": ":boom: Breaking Change",
+      "Type: Deprecated": ":warning: Deprecated Features",
+      "Type: I18n": ":globe_with_meridians: Internationalization",
+      "Type: A11y": ":wheelchair: Accessibility",
+      "Type: Documentation": ":pencil: Documentation"
+    }
+  },
   "devDependencies": {
     "@antfu/eslint-config-ts": "^0.6.6",
+    "@kazupon/lerna-changelog": "^4.3.0",
+    "@secretlint/secretlint-rule-preset-recommend": "^3.1.0",
     "@types/jest": "^27.0.1",
     "@vue/composition-api": "^1.1.4",
     "@vue/test-utils": "^1.2.2",
@@ -12,18 +32,55 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.1.1",
+    "lint-staged": "^11.1.2",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.3.2",
+    "prettier": "^2.4.0",
+    "secretlint": "^3.3.0",
+    "shipjs": "^0.23.3",
     "ts-jest": "^27.0.5",
     "tsup": "^4.14.0",
     "typescript": "^4.4.2",
     "vue": "^2.6.12",
-    "vue-i18n": "^8.25.0"
+    "vue-i18n": "^8.25.0",
+    "yorkie": "^2.0.0"
+  },
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs"
   },
   "files": [
     "dist"
   ],
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "homepage": "https://github.com/intlify/vue-i18n-composable/tree/master#readme",
+  "keywords": [
+    "composition-api",
+    "i18n",
+    "internationalization",
+    "intlify",
+    "vue",
+    "vue-i18n",
+    "vue.js"
+  ],
   "license": "MIT",
+  "lint-staged": {
+    "*.{json,md,yml}": [
+      "prettier --write"
+    ],
+    "*.{js,vue}": [
+      "prettier --write",
+      "eslint --fix --ext .js,.vue"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write",
+      "eslint --fix --ext .ts"
+    ],
+    "*": [
+      "secretlint"
+    ]
+  },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "peerDependencies": {
@@ -31,24 +88,25 @@
     "vue": ">=2.5 <3",
     "vue-i18n": ">=8 <9"
   },
-  "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/index.mjs"
-  },
   "repository": "https://github.com/intlify/vue-i18n-composable",
   "scripts": {
     "build": "tsup src/index.ts --format iife,cjs,esm --dts --external vue,vue-i18n,@vue/composition-api",
     "dev": "npm run build -- --watch",
+    "fix": "npm-run-all --parallel lint:fix format:fix",
+    "format:fix": "npm-run-all --parallel \"format:prettier -- --write\"",
+    "format:prettier": "prettier --config .prettierrc --ignore-path .prettierignore '**/*.{js,json,html}'",
+    "lint": "npm-run-all --parallel lint:secret lint:codes",
+    "lint:codes": "eslint ./src --ext .js,.ts,.vue,.json",
+    "lint:fix": "npm-run-all --parallel \"lint:codes -- --fix\"",
+    "lint:secret": "secretlint \"**/*\"",
+    "prepublishOnly": "npm run build",
+    "release": "npx bumpp --commit --tag && npm publish && git push",
+    "release:prepare": "shipjs prepare",
+    "release:trigger": "shipjs trigger",
     "test": "npm run test:cover",
     "test:cover": "npm run test:unit -- --coverage",
-    "test:unit": "jest --clearCache && jest --env node",
-    "fix": "npm-run-all --parallel lint:fix format:fix",
-    "format": "prettier --config .prettierrc --ignore-path .prettierignore '**/*.{js,json,html,ts}'",
-    "format:fix": "npm run format -- --write",
-    "lint": "eslint ./src --config .eslintrc.js --ext .ts",
-    "lint:fix": "npm run lint -- --fix",
-    "prepublishOnly": "npm run build",
-    "release": "npx bumpp --commit --tag && npm publish && git push"
+    "test:unit": "jest --clearCache && jest --env node"
   },
+  "sideEffects": false,
   "types": "dist/index.d.ts"
 }
