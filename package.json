@@ -21,8 +21,7 @@
     "vue-i18n": "^8.25.0"
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "license": "MIT",
   "main": "dist/index.js",
@@ -32,10 +31,14 @@
     "vue": ">=2.5 <3",
     "vue-i18n": ">=8 <9"
   },
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs"
+  },
   "repository": "https://github.com/intlify/vue-i18n-composable",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --external vue,vue-i18n,@vue/composition-api",
-    "dev": "npm run build --watch",
+    "build": "tsup src/index.ts --format iife,cjs,esm --dts --external vue,vue-i18n,@vue/composition-api",
+    "dev": "npm run build -- --watch",
     "test": "npm run test:cover",
     "test:cover": "npm run test:unit -- --coverage",
     "test:unit": "jest --clearCache && jest --env node",

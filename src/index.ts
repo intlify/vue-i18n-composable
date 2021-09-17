@@ -6,11 +6,7 @@ import type { WritableComputedRef } from '@vue/composition-api'
 
 let i18nInstance: VueI18n | undefined
 
-export function createI18n(
-  options?: VueI18n.I18nOptions,
-  vue: VueConstructor = Vue
-): VueI18n {
-  vue.use(VueI18n)
+export function createI18n(options?: VueI18n.I18nOptions): VueI18n {
   i18nInstance = new VueI18n(options)
 
   return i18nInstance

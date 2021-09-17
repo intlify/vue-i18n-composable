@@ -3,6 +3,7 @@
  */
 import CompositionAPI, { nextTick } from '@vue/composition-api'
 import { createLocalVue, mount } from '@vue/test-utils'
+import VueI18n from 'vue-i18n'
 import { createI18n, useI18n } from '../src/index'
 
 const container = document.createElement('div')
@@ -14,17 +15,15 @@ beforeEach(() => {
 
 test('createI18n', () => {
   const localVue = createLocalVue()
-  const i18n = createI18n(
-    {
-      locale: 'en',
-      fallbackLocale: 'en',
-      messages: {
-        en: { hello: 'Hello' },
-        ja: { hello: 'こんにちは' }
-      }
-    },
-    localVue
-  )
+  localVue.use(VueI18n)
+  const i18n = createI18n({
+    locale: 'en',
+    fallbackLocale: 'en',
+    messages: {
+      en: { hello: 'Hello' },
+      ja: { hello: 'こんにちは' }
+    }
+  })
   expect(i18n.locale).toBe('en')
   expect(i18n.fallbackLocale).toBe('en')
   expect(i18n.t('hello')).toBe('Hello')
