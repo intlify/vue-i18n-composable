@@ -2,14 +2,62 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import { computed, getCurrentInstance } from '@vue/composition-api'
 import { VueConstructor } from 'vue/types/umd'
-import { isBoolean, assign } from '@intlify/shared'
-import type { WritableComputedRef } from '@vue/composition-api'
+import { isBoolean, isObject, isEmptyObject, assign } from '@intlify/shared'
+import type {
+  WritableComputedRef,
+  ComponentInternalInstance
+} from '@vue/composition-api'
 import type {
   I18nOptions,
   ComposerOptions,
+  Locale,
   I18n,
-  I18nMode
+  I18nMode,
+  I18nScope,
+  UseI18nOptions,
+  Composer,
+  VueI18n as LegacyVueI18n,
+  LocaleParams,
+  SchemaParams,
+  DefaultLocaleMessageSchema,
+  VueMessageType
 } from '@intlify/vue-i18n-core'
+import { getLocaleMessages } from './composer'
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    readonly $i18n: VueI18n & I18n
+  }
+}
+
+export interface I18nInternal<
+  Messages = {},
+  DateTimeFormats = {},
+  NumberFormats = {},
+  OptionLocale = Locale
+> {
+  __instances: Map<
+    ComponentInternalInstance,
+    | LegacyVueI18n<Messages, DateTimeFormats, NumberFormats, OptionLocale>
+    | Composer<Messages, DateTimeFormats, NumberFormats, OptionLocale>
+  >
+  __getInstance<
+    Instance extends
+      | LegacyVueI18n<Messages, DateTimeFormats, NumberFormats, OptionLocale>
+      | Composer<Messages, DateTimeFormats, NumberFormats, OptionLocale>
+  >(
+    component: ComponentInternalInstance
+  ): Instance | null
+  __setInstance<
+    Instance extends
+      | LegacyVueI18n<Messages, DateTimeFormats, NumberFormats, OptionLocale>
+      | Composer<Messages, DateTimeFormats, NumberFormats, OptionLocale>
+  >(
+    component: ComponentInternalInstance,
+    instance: Instance
+  ): void
+  __deleteInstance(component: ComponentInternalInstance): void
+}
 
 export function createI18n(options: I18nOptions = {}): VueI18n & I18n {
   const legacyMode = isBoolean(options.legacy) ? options.legacy : true
@@ -71,40 +119,127 @@ function convertToLegacyI18nOptions(
   return legacyOptions
 }
 
-export interface Composer {
-  locale: WritableComputedRef<string>
-  t: typeof VueI18n.prototype.t
-  tc: typeof VueI18n.prototype.tc
-  te: typeof VueI18n.prototype.te
-  d: typeof VueI18n.prototype.d
-  n: typeof VueI18n.prototype.n
-}
+export function useI18n<Options extends UseI18nOptions = UseI18nOptions>(
+  options?: Options
+): Composer<
+  NonNullable<Options['messages']>,
+  NonNullable<Options['datetimeFormats']>,
+  NonNullable<Options['numberFormats']>,
+  NonNullable<Options['locale']>
+>
 
-export function useI18n(): Composer {
+export function useI18n<
+  Schema = DefaultLocaleMessageSchema,
+  Locales = 'en-US',
+  Options extends UseI18nOptions<
+    SchemaParams<Schema, VueMessageType>,
+    LocaleParams<Locales>
+  > = UseI18nOptions<
+    SchemaParams<Schema, VueMessageType>,
+    LocaleParams<Locales>
+  >
+>(
+  options?: Options
+): Composer<
+  NonNullable<Options['messages']>,
+  NonNullable<Options['datetimeFormats']>,
+  NonNullable<Options['numberFormats']>,
+  NonNullable<Options['locale']>
+>
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export function useI18n<
+  Options extends UseI18nOptions = UseI18nOptions,
+  Messages = NonNullable<Options['messages']>,
+  DateTimeFormats = NonNullable<Options['datetimeFormats']>,
+  NumberFormats = NonNullable<Options['numberFormats']>,
+  OptionLocale = NonNullable<Options['locale']>
+>(options: Options = {} as Options) {
   const instance = getCurrentInstance()
-  const vm =
-    instance?.proxy ||
-    (instance as unknown as InstanceType<VueConstructor>) ||
-    new Vue({})
+  // TODO:
+  if (instance == null) throw new Error('error')
 
-  const i18n = vm.$i18n as VueI18n & I18n
+  const vm = instance.proxy
+  const i18n = vm.$root.$i18n
+  // TODO:
   if (!i18n) throw new Error('vue-i18n not initialized')
+  // TODO:
+  if (i18n.mode === 'legacy') throw new Error('vue-i18n is in legacy mode')
+
+  const global = vm.$root.$i18n.global
+
+  // prettier-ignore
+  const scope: I18nScope = isEmptyObject(options)
+    ? ('__i18n' in vm.$options)
+      ? 'local'
+      : 'global'
+    : !options.useScope
+      ? 'local'
+      : options.useScope
+
+  if (scope === 'global') {
+    let messages = isObject(options.messages) ? options.messages : {}
+    if ('__i18nGlobal' in vm.$options) {
+      messages = getLocaleMessages(global.locale.value as Locale, {
+        messages,
+        __i18n: (vm.$options as any).__i18nGlobal
+      })
+    }
+    // merge locale messages
+    const locales = Object.keys(messages)
+    if (locales.length) {
+      locales.forEach(locale => {
+        global.mergeLocaleMessage(locale, messages[locale])
+      })
+    }
+
+    // merge datetime formats
+    if (isObject(options.datetimeFormats)) {
+      const locales = Object.keys(options.datetimeFormats)
+      if (locales.length) {
+        locales.forEach(locale => {
+          global.mergeDateTimeFormat(locale, options.datetimeFormats![locale])
+        })
+      }
+    }
+    // merge number formats
+    if (isObject(options.numberFormats)) {
+      const locales = Object.keys(options.numberFormats)
+      if (locales.length) {
+        locales.forEach(locale => {
+          global.mergeNumberFormat(locale, options.numberFormats![locale])
+        })
+      }
+    }
+
+    return global as Composer<
+      Messages,
+      DateTimeFormats,
+      NumberFormats,
+      OptionLocale
+    >
+  }
 
   const locale = computed({
     get() {
-      return i18n.locale
+      return global.locale
     },
     set(v: string) {
-      i18n.locale = v
+      global.locale = v
     }
   })
 
   return {
-    locale,
-    t: vm.$t.bind(vm),
-    tc: vm.$tc.bind(vm),
-    d: vm.$d.bind(vm),
-    te: vm.$te.bind(vm),
-    n: vm.$n.bind(vm)
-  }
+    locale
+    // t: vm.$t.bind(vm),
+    // tc: vm.$tc.bind(vm),
+    // d: vm.$d.bind(vm),
+    // te: vm.$te.bind(vm),
+    // n: vm.$n.bind(vm)
+  } as unknown as Composer<
+    Messages,
+    DateTimeFormats,
+    NumberFormats,
+    OptionLocale
+  >
 }

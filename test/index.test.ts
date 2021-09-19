@@ -11,7 +11,8 @@ let localVue
 
 beforeEach(() => {
   localVue = createLocalVue()
-  localVue.use(VueI18n)
+  // @ts-ignore
+  localVue.use(VueI18n, { composition: true })
 })
 
 afterEach(() => {
