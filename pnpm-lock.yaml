@@ -28,7 +28,7 @@ importers:
       tsup: ^4.14.0
       typescript: ^4.4.2
       vue: ^2.6.12
-      vue-i18n: file:../../../my/vue-i18n/
+      vue-i18n: ^8.25.0
       yorkie: ^2.0.0
     dependencies:
       '@intlify/shared': 9.2.0-beta.4
@@ -56,7 +56,7 @@ importers:
       tsup: 4.14.0_typescript@4.4.2
       typescript: 4.4.2
       vue: 2.6.14
-      vue-i18n: link:../../../my/vue-i18n
+      vue-i18n: 8.25.0
       yorkie: 2.0.0
 
   example:
@@ -2364,7 +2364,7 @@ packages:
   /axios/0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.14.3
+      follow-redirects: 1.14.3_debug@4.3.2
     transitivePeerDependencies:
       - debug
     dev: true
@@ -5147,7 +5147,7 @@ packages:
       readable-stream: 2.3.7
     dev: true
 
-  /follow-redirects/1.14.3:
+  /follow-redirects/1.14.3_debug@4.3.2:
     resolution: {integrity: sha512-3MkHxknWMUtb23apkgz/83fDoe+y+qr0TdgacGIA7bew+QLBo3vdgEN2xEsuXNivpFy4CyDhBBZnNZOtalmenw==}
     engines: {node: '>=4.0'}
     peerDependencies:
@@ -5155,6 +5155,8 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dependencies:
+      debug: 4.3.2
     dev: true
 
   /for-in/1.0.2:
@@ -5855,7 +5857,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.14.3
+      follow-redirects: 1.14.3_debug@4.3.2
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -11322,7 +11324,6 @@ packages:
 
   /vue-i18n/8.25.0:
     resolution: {integrity: sha512-ynhcL+PmTxuuSE1T10htiSXzjBozxYIE3ffbM1RfgAkVbr/v1SP+9Mi/7/uv8ZVV1yGuKjFAYp9BXq+X7op6MQ==}
-    dev: false
 
   /vue-loader/15.9.8_679359cdb69c218f2f8f476b2ba08796:
     resolution: {integrity: sha512-GwSkxPrihfLR69/dSV3+5CdMQ0D+jXg8Ma1S4nQXKJAznYFX14vHdc/NetQc34Dw+rBbIJyP7JOuVb9Fhprvog==}
