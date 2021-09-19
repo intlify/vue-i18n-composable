@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config-ts": "^0.6.6",
+    "@intlify/vue-i18n-core": "^9.2.0-beta.4",
     "@kazupon/lerna-changelog": "^4.3.0",
     "@secretlint/secretlint-rule-preset-recommend": "^3.1.0",
     "@types/jest": "^27.0.1",
@@ -108,5 +109,8 @@
     "test:unit": "jest --clearCache && jest --env node"
   },
   "sideEffects": false,
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "@intlify/shared": "^9.2.0-beta.4"
+  }
 }
