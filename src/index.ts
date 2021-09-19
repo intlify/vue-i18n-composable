@@ -1,12 +1,7 @@
-import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import { computed, getCurrentInstance } from '@vue/composition-api'
-import { VueConstructor } from 'vue/types/umd'
 import { isBoolean, isObject, isEmptyObject, assign } from '@intlify/shared'
-import type {
-  WritableComputedRef,
-  ComponentInternalInstance
-} from '@vue/composition-api'
+import type { ComponentInternalInstance } from '@vue/composition-api'
 import type {
   I18nOptions,
   ComposerOptions,

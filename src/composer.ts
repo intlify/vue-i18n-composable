@@ -105,7 +105,7 @@ export function createComposer(options: any = {}): any {
     DateTimeFormatsType,
     NumberFormatsType
   >
-  const _isGlobal = __root === undefined
+  // TODO: const _isGlobal = __root === undefined
 
   const _inheritLocale = isBoolean(options.inheritLocale)
     ? options.inheritLocale
@@ -223,6 +223,7 @@ export function createComposer(options: any = {}): any {
   const _legacy = new VueI18n(legacyOptions)
 
   // track reactivity
+  /*
   function trackReactivityValues() {
     // TODO:
     return [
@@ -233,6 +234,7 @@ export function createComposer(options: any = {}): any {
       _legacy.numberFormats
     ]
   }
+  */
 
   // locale
   const locale = computed({
