@@ -40,3 +40,5 @@ jobs:
         run: pnpm install
       - name: Test
         run: pnpm test
+      # https://github.com/actions/runner/issues/795
+      - run: echo "NODE_ICU_DATA=" >> $GITHUB_ENV
