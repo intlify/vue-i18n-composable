@@ -82,7 +82,7 @@
     ]
   },
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "peerDependencies": {
     "@vue/composition-api": ">= 1.0.0-beta.1",
     "vue": ">=2.5 <3",
