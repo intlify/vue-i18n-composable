@@ -45,8 +45,8 @@
     "yorkie": "^2.0.0"
   },
   "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/index.mjs"
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.js"
   },
   "files": [
     "dist"
