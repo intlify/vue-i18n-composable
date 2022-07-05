@@ -1,7 +1,7 @@
 {
   "name": "vue-i18n-composable",
   "description": "Composition API for vue-i18n in Vue 2.x",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "packageManager": "pnpm@7.4.0",
   "bugs": {
