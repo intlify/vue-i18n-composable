@@ -39,6 +39,7 @@ module.exports = {
   mergeStrategy: { toSameBranch: ['master'] },
   monorepo: undefined,
   updateChangelog: false,
+  installCommand: () => 'pnpm install --silent',
   buildCommand: ({ isYarn }) => 'pnpm run build',
   beforeCommitChanges: ({ nextVersion, exec, dir }) => {
     return new Promise(resolve => {
