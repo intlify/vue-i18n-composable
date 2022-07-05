@@ -10,9 +10,15 @@ module.exports = {
     jest: true
   },
   extends: [
-    '@antfu/eslint-config-ts',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:prettier/recommended',
     'prettier'
   ],
+  plugins: ['@typescript-eslint'],
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    sourceType: 'module'
+  },
   rules: {}
 }
