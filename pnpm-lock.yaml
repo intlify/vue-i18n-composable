@@ -9,9 +9,8 @@ importers:
       '@types/jest': ^27.0.1
       '@typescript-eslint/eslint-plugin': ^5.30.0
       '@typescript-eslint/parser': ^5.30.0
-      '@vue/composition-api': ^1.1.4
-      '@vue/test-utils': ^1.2.2
-      '@vue/vue2-jest': ^27.0.0-alpha.1
+      '@vue/test-utils': ^1.3.0
+      '@vue/vue2-jest': ^28.0.1
       eslint: ^8.19.0
       eslint-config-prettier: ^8.3.0
       eslint-plugin-prettier: ^4.0.0
@@ -24,8 +23,9 @@ importers:
       ts-jest: ^27.0.5
       tsup: ^4.14.0
       typescript: ^4.4.2
-      vue: ^2.6.12
+      vue: ^2.7.1
       vue-i18n: ^8.25.0
+      vue-template-compiler: ^2.7.1
       yorkie: ^2.0.0
     devDependencies:
       '@kazupon/lerna-changelog': 4.3.0
@@ -33,9 +33,8 @@ importers:
       '@types/jest': 27.5.2
       '@typescript-eslint/eslint-plugin': 5.30.5_6zdoc3rn4mpiddqwhppni2mnnm
       '@typescript-eslint/parser': 5.30.5_4x5o4skxv6sl53vpwefgt23khm
-      '@vue/composition-api': 1.7.0_vue@2.7.2
-      '@vue/test-utils': 1.3.0_vue@2.7.2
-      '@vue/vue2-jest': 27.0.0_nh3dsal6vpgbv5pekvbqs2cm34
+      '@vue/test-utils': 1.3.0_3nfh44j2akm4x4p3k4jkd4c4pm
+      '@vue/vue2-jest': 28.0.1_fuc6w6mm5eb53tkmnkx4ov7s7q
       eslint: 8.19.0
       eslint-config-prettier: 8.5.0_eslint@8.19.0
       eslint-plugin-prettier: 4.2.1_7uxdfn2xinezdgvmbammh6ev5i
@@ -50,6 +49,7 @@ importers:
       typescript: 4.7.4
       vue: 2.7.2
       vue-i18n: 8.27.2
+      vue-template-compiler: 2.7.2
       yorkie: 2.0.0
 
   example:
@@ -1797,6 +1797,7 @@ packages:
       vue: '>= 2.5 < 2.7'
     dependencies:
       vue: 2.7.2
+    dev: false
 
   /@vue/preload-webpack-plugin/1.1.2_kawgdd6iu7jv34d6smtvgjfc2a:
     resolution: {integrity: sha512-LIZMuJk38pk9U9Ur4YzHjlIyMuxPlACdBIHH9/nGYVTsaGKOSnSuELiE8vS9wa+dJpIYspYUOqk+L1Q4pgHQHQ==}
@@ -1809,7 +1810,7 @@ packages:
       webpack: 4.46.0
     dev: true
 
-  /@vue/test-utils/1.3.0_vue@2.7.2:
+  /@vue/test-utils/1.3.0_3nfh44j2akm4x4p3k4jkd4c4pm:
     resolution: {integrity: sha512-Xk2Xiyj2k5dFb8eYUKkcN9PzqZSppTlx7LaQWBbdA8tqh3jHr/KHX2/YLhNFc/xwDrgeLybqd+4ZCPJSGPIqeA==}
     peerDependencies:
       vue: 2.x
@@ -1819,15 +1820,17 @@ packages:
       lodash: 4.17.21
       pretty: 2.0.0
       vue: 2.7.2
+      vue-template-compiler: 2.7.2
     dev: true
 
-  /@vue/vue2-jest/27.0.0_nh3dsal6vpgbv5pekvbqs2cm34:
-    resolution: {integrity: sha512-r8YGOuqEWpAf2wGfgxfOL6Jce3WYOMcYji2qd8kuDe466ZsybHFeMryMJi6JrELOOI+MCA/8eFsSOx1KoJa7Dg==}
+  /@vue/vue2-jest/28.0.1_fuc6w6mm5eb53tkmnkx4ov7s7q:
+    resolution: {integrity: sha512-PLjs8TU7MrEeVJtf1prWOyUH4OXPOl6z/oPopu/t5OFU8sphb5vMYDgIIVfMhVpZBFmS+ucZalFXAaTA6vf6jQ==}
+    engines: {node: '>10'}
     peerDependencies:
       '@babel/core': 7.x
-      babel-jest: '>= 27 < 28'
-      jest: 27.x
-      ts-jest: '>= 27 < 28'
+      babel-jest: '>= 28 < 29'
+      jest: 28.x
+      ts-jest: '>= 28 < 29'
       vue: ^2.x
       vue-template-compiler: ^2.x
     peerDependenciesMeta:
@@ -1842,6 +1845,7 @@ packages:
       source-map: 0.5.6
       ts-jest: 27.1.5_mqaoisgizytgigbr3gbjwvnjie
       vue: 2.7.2
+      vue-template-compiler: 2.7.2
     transitivePeerDependencies:
       - arc-templates
       - atpl

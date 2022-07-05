@@ -1,8 +1,7 @@
-import Vue from 'vue'
+import Vue, { computed, getCurrentInstance } from 'vue'
+import type { WritableComputedRef } from 'vue'
 import VueI18n from 'vue-i18n'
-import { computed, getCurrentInstance } from '@vue/composition-api'
 import { VueConstructor } from 'vue/types/umd'
-import type { WritableComputedRef } from '@vue/composition-api'
 
 let i18nInstance: VueI18n | undefined
 

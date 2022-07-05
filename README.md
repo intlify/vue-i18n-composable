@@ -20,11 +20,8 @@ npm i vue-i18n <b>vue-i18n-composable</b> @vue/composition-api
 ```js
 // main.js
 import Vue from 'vue'
-import VueCompositionAPI, { createApp } from '@vue/composition-api'
 import { createI18n } from 'vue-i18n-composable'
 import App from './App.vue'
-
-Vue.use(VueCompositionAPI)
 
 const i18n = createI18n({
   locale: 'ja',
@@ -38,7 +35,7 @@ const i18n = createI18n({
   },
 })
 
-const app = createApp({
+const app = new Vue({
   render: h => h(App),
   i18n,
 })
@@ -54,7 +51,7 @@ In components
 </template>
 
 <script>
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n-composable'
 
 export default defineComponent({
