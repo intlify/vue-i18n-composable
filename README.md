@@ -6,6 +6,9 @@ Composition API for `vue-i18n` in Vue 2.x
 <img alt="npm" src="https://img.shields.io/npm/v/vue-i18n-composable">
 </a>
 
+## Support Vue version
+- `vue-i18n-composable@v1`: `>=2.5 <=2.6`
+
 ## Install
 
 <pre>
