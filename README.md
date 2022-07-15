@@ -30,8 +30,11 @@ npm i @vue/composition-api
 ```js
 // main.js
 import Vue from 'vue'
+import VueI18n from 'vue-i18n'
 import { createI18n } from 'vue-i18n-composable'
 import App from './App.vue'
+
+Vue.use(VueI18n)
 
 const i18n = createI18n({
   locale: 'ja',
@@ -79,11 +82,13 @@ export default defineComponent({
 ```js
 // main.js
 import Vue from 'vue'
+import VueI18n from 'vue-i18n'
 import VueCompositionAPI, { createApp } from '@vue/composition-api'
 import { createI18n } from 'vue-i18n-composable'
 import App from './App.vue'
 
 Vue.use(VueCompositionAPI)
+Vue.use(VueI18n)
 
 const i18n = createI18n({
   locale: 'ja',
